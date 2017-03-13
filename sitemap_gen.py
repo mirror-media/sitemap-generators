@@ -1,4 +1,5 @@
 #!/usr/bin/python
+# coding=utf8
 #
 # Copyright (c) 2004, 2005 Google Inc.
 # All rights reserved.
@@ -723,6 +724,13 @@ class NewsURL(URL):
     if not self.loc:
       return
     out = SITEURL_XML_PREFIX
+
+    out = out + ('  <news:news>\n')
+    out = out + ('    <news:publication>\n')
+    out = out + ('      <news:name><![CDATA[鏡傳媒]]></news:name>\n')
+    out = out + ('      <news:language>zh-tw</news:language>\n')
+    out = out + ('    </news:publication>\n')
+    out = out + ('  </news:news>\n')
 
     # printed_news_tag indicates if news-specific metatags are present
     printed_news_tag = False
