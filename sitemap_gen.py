@@ -97,7 +97,7 @@ SITEMAP_TYPES = ['web', 'mobile', 'news']
 GENERAL_SITEMAP_TAGS = ['loc', 'changefreq', 'priority', 'lastmod']
 
 # News specific tags
-NEWS_SPECIFIC_TAGS = ['keywords', 'publication_date', 'stock_tickers']
+NEWS_SPECIFIC_TAGS = ['keywords', 'publication_date', 'stock_tickers', 'title']
 
 # News Sitemap tags
 NEWS_SITEMAP_TAGS = GENERAL_SITEMAP_TAGS + NEWS_SPECIFIC_TAGS
@@ -697,7 +697,7 @@ class URL(object):
 class NewsURL(URL):
   """ NewsURL is a subclass of URL with News-Sitemap specific properties. """
   __slots__ = 'loc', 'lastmod', 'changefreq', 'priority', 'publication_date', \
-	      'keywords', 'stock_tickers'
+	      'keywords', 'stock_tickers', 'title'
 
   def __init__(self):
     URL.__init__(self)
@@ -725,13 +725,6 @@ class NewsURL(URL):
       return
     out = SITEURL_XML_PREFIX
 
-    out = out + ('  <news:news>\n')
-    out = out + ('    <news:publication>\n')
-    out = out + ('      <news:name><![CDATA[鏡傳媒]]></news:name>\n')
-    out = out + ('      <news:language>zh-tw</news:language>\n')
-    out = out + ('    </news:publication>\n')
-    out = out + ('  </news:news>\n')
-
     # printed_news_tag indicates if news-specific metatags are present
     printed_news_tag = False
     for attribute in self.__slots__:
@@ -749,6 +742,10 @@ class NewsURL(URL):
 	  out = out + ('    <news:%s>%s</news:%s>\n' % (attribute, value, attribute))
         else:
 	  out = out + ('  <%s>%s</%s>\n' % (attribute, value, attribute))
+    out = out + ('    <news:publication>\n')
+    out = out + ('      <news:name><![CDATA[鏡傳媒]]></news:name>\n')
+    out = out + ('      <news:language>zh-tw</news:language>\n')
+    out = out + ('    </news:publication>\n')
 
     if printed_news_tag:
       out = out + NEWS_TAG_XML_SUFFIX
