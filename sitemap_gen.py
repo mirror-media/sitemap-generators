@@ -743,7 +743,7 @@ class NewsURL(URL):
         else:
 	  out = out + ('  <%s>%s</%s>\n' % (attribute, value, attribute))
     out = out + ('    <news:publication>\n')
-    out = out + ('      <news:name>鏡傳媒</news:name>\n')
+    out = out + ('      <news:name>鏡週刊</news:name>\n')
     out = out + ('      <news:language>zh-tw</news:language>\n')
     out = out + ('    </news:publication>\n')
 
